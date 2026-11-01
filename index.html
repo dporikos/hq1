@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="el">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10162b" />
+    <title>Το Μεγάλο Σχίσμα | History Arena</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <header class="topbar">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark">✦</span
+        ><span>HISTORY<span class="brand-light">ARENA</span></span></a
+      >
+      <div class="top-meta">
+        <span class="live-dot"></span><span>ΙΣΤΟΡΙΚΟ QUIZ</span
+        ><span class="top-divider"></span><span>ΒΥΖΑΝΤΙΟ · 1054–1965</span>
+      </div>
+    </header>
+    <main id="app" class="app-shell">
+      <section id="homeScreen" class="screen home-screen">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="eyebrow-line"></span>THE HISTORY CHALLENGE
+          </div>
+          <h1>Το Μεγάλο<br /><span>Σχίσμα.</span></h1>
+          <p class="hero-description">
+            31 ερωτήσεις. Είκοσι δευτερόλεπτα για καθεμία. Πόσα γνωρίζεις για τη
+            διαίρεση και τις προσπάθειες ένωσης των δύο Εκκλησιών;
+          </p>
+          <div class="hero-stats">
+            <div><strong>31</strong><small>ΕΡΩΤΗΣΕΙΣ</small></div>
+            <i></i>
+            <div><strong>20″</strong><small>ΑΝΑ ΓΥΡΟ</small></div>
+            <i></i>
+            <div><strong>1</strong><small>ΝΙΚΗΤΗΣ</small></div>
+          </div>
+          <div class="home-actions">
+            <button id="createRoomBtn" class="primary-btn">
+              Δημιουργία παιχνιδιού <span>↗</span></button
+            ><a class="text-link" href="?mode=player"
+              >Είμαι παίκτης <span>→</span></a
+            >
+          </div>
+          <p class="tiny-note">
+            Για δοκιμή σε αυτή την έκδοση, άνοιξε τον σύνδεσμο παίκτη σε άλλη
+            καρτέλα του ίδιου browser.
+          </p>
+        </div>
+        <div class="hero-art">
+          <div class="art-frame">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Sainte-Sophie-mosaique-empereur-offrant-basilique.jpg?width=1000"
+              alt="Βυζαντινό ψηφιδωτό στην Αγία Σοφία"
+            />
+            <div class="art-shade"></div>
+            <div class="art-caption">
+              <span>ΑΝΑΤΟΛΗ × ΔΥΣΗ</span
+              ><strong>Ένα ιστορικό σημείο καμπής</strong>
+            </div>
+          </div>
+          <div class="floating-date">
+            <small>ΤΟ ΕΤΟΣ ΤΟΥ ΣΧΙΣΜΑΤΟΣ</small><strong>1054</strong
+            ><span>Κωνσταντινούπολη · Ρώμη</span>
+          </div>
+          <div class="orbit orbit-a"></div>
+          <div class="orbit orbit-b"></div>
+        </div>
+      </section>
+
+      <section id="hostScreen" class="screen hidden">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">
+              <span class="eyebrow-line"></span>HOST CONTROL
+            </div>
+            <h2 id="hostTitle">Το δωμάτιό σου</h2>
+            <p id="hostSubtitle" class="muted">
+              Περίμενε να συνδεθούν οι παίκτες.
+            </p>
+          </div>
+          <div class="room-pill">
+            ΚΩΔΙΚΟΣ <strong id="roomCode">----</strong>
+          </div>
+        </div>
+        <div class="host-layout">
+          <div class="host-main panel">
+            <div id="lobbyPanel">
+              <div class="panel-kicker">01 / LOBBY</div>
+              <h3>Έτοιμοι για την πρόκληση;</h3>
+              <p class="muted">
+                Οι παίκτες μπορούν να μπουν από την επιλογή «Είμαι παίκτης» και
+                να πληκτρολογήσουν τον κωδικό του δωματίου.
+              </p>
+              <div class="join-url">
+                <span>ΣΥΝΔΕΣΜΟΣ ΠΑΙΚΤΗ</span
+                ><code id="playerUrl">?mode=player</code
+                ><button
+                  id="copyLinkBtn"
+                  class="icon-btn"
+                  title="Αντιγραφή συνδέσμου"
+                >
+                  ▣
+                </button>
+              </div>
+              <div class="players-heading">
+                <span>ΠΑΙΚΤΕΣ ΣΤΟ ΔΩΜΑΤΙΟ</span
+                ><strong id="playerCount">0</strong>
+              </div>
+              <div id="lobbyPlayers" class="player-list empty-list">
+                Περιμένουμε τους πρώτους παίκτες…
+              </div>
+              <button id="startGameBtn" class="primary-btn wide-btn" disabled>
+                Έναρξη παιχνιδιού <span>→</span>
+              </button>
+            </div>
+            <div id="questionHostPanel" class="hidden">
+              <div class="question-topline">
+                <span id="questionCounter">ΕΡΩΤΗΣΗ 01 / 10</span
+                ><span class="timer-chip"
+                  ><span class="live-dot"></span><b id="hostTimer">20</b>″</span
+                >
+              </div>
+              <div class="progress-track">
+                <div id="hostProgress" class="progress-fill"></div>
+              </div>
+              <div class="host-question-layout">
+                <div>
+                  <h3 id="hostQuestionText"></h3>
+                  <div id="hostAnswers" class="answer-preview"></div>
+                </div>
+                <div class="image-wrap">
+                  <img
+                    id="hostQuestionImage"
+                    class="question-image"
+                    alt="Ιστορική εικόνα σχετική με την ερώτηση"
+                  /><small id="hostImageCredit" class="image-credit"></small>
+                </div>
+              </div>
+              <div class="answer-status">
+                <span>ΑΠΑΝΤΗΣΕΙΣ ΠΟΥ ΕΧΟΥΝ ΚΑΤΑΧΩΡΙΣΤΕΙ</span
+                ><strong id="answerCount">0 / 0</strong>
+              </div>
+              <button id="revealBtn" class="primary-btn wide-btn" disabled>
+                Αποτελέσματα ερώτησης <span>→</span>
+              </button>
+            </div>
+            <div id="resultHostPanel" class="hidden">
+              <div class="panel-kicker">ROUND COMPLETE</div>
+              <div class="result-heading">
+                <div>
+                  <h3>Αποτελέσματα ερώτησης</h3>
+                  <p id="correctAnswerText" class="muted"></p>
+                </div>
+                <div class="correct-stamp">✓</div>
+              </div>
+              <div id="roundLeaderboard" class="leaderboard"></div>
+              <button id="nextQuestionBtn" class="primary-btn wide-btn">
+                Επόμενη ερώτηση <span>→</span>
+              </button>
+            </div>
+            <div id="finalHostPanel" class="hidden final-panel">
+              <div class="trophy">🏆</div>
+              <div class="eyebrow">THE CHAMPION</div>
+              <h2>Έχουμε νικητή!</h2>
+              <div id="winnerName" class="winner-name">—</div>
+              <p id="winnerScore" class="muted"></p>
+              <div id="finalLeaderboard" class="leaderboard"></div>
+              <button id="restartBtn" class="primary-btn wide-btn">
+                Νέο παιχνίδι <span>↻</span>
+              </button>
+            </div>
+          </div>
+          <aside class="host-side panel">
+            <div class="panel-kicker">GAME OVERVIEW</div>
+            <div class="overview-number">10<span> ερωτήσεις</span></div>
+            <div class="overview-line"></div>
+            <div class="overview-row">
+              <span>Χρόνος ανά ερώτηση</span><strong>20″</strong>
+            </div>
+            <div class="overview-row">
+              <span>Μέγιστοι πόντοι / γύρο</span><strong>1.000</strong>
+            </div>
+            <div class="overview-row">
+              <span>Θέμα</span><strong>Ιστορία</strong>
+            </div>
+            <div class="side-quote">
+              «Η γνώση γίνεται παιχνίδι όταν μπαίνει ο χρόνος.»
+            </div>
+            <div class="side-decoration">✳</div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="playerScreen" class="screen player-screen hidden">
+        <div id="playerJoinPanel" class="player-card panel">
+          <div class="eyebrow">
+            <span class="eyebrow-line"></span>JOIN THE ARENA
+          </div>
+          <h2>Μπες στο<br /><span>παιχνίδι.</span></h2>
+          <p class="muted">
+            Πληκτρολόγησε τον κωδικό που εμφανίζεται στην οθόνη του παρουσιαστή.
+          </p>
+          <label for="roomInput">ΚΩΔΙΚΟΣ ΔΩΜΑΤΙΟΥ</label
+          ><input
+            id="roomInput"
+            maxlength="4"
+            placeholder="π.χ. 4821"
+            autocomplete="off"
+          /><label for="nameInput">ΤΟ ΟΝΟΜΑ ΣΟΥ</label
+          ><input
+            id="nameInput"
+            maxlength="18"
+            placeholder="Πώς σε λένε;"
+            autocomplete="off"
+          />
+          <p id="joinError" class="error-text"></p>
+          <button id="joinBtn" class="primary-btn wide-btn">
+            Σύνδεση <span>→</span>
+          </button>
+        </div>
+        <div id="playerWaitingPanel" class="player-card panel hidden">
+          <div class="waiting-orbit">✦</div>
+          <div class="eyebrow">YOU'RE IN</div>
+          <h2>
+            Καλή επιτυχία,<br /><span id="playerWelcomeName">παίκτη!</span>
+          </h2>
+          <p class="muted">
+            Περιμένουμε να ξεκινήσει ο παρουσιαστής το παιχνίδι.
+          </p>
+          <div class="waiting-status">
+            <span class="live-dot"></span> ΣΥΝΔΕΘΗΚΕΣ ΕΠΙΤΥΧΩΣ
+          </div>
+        </div>
+        <div id="playerQuestionPanel" class="player-card panel hidden">
+          <div class="question-topline">
+            <span id="playerQuestionCounter">ΕΡΩΤΗΣΗ 01 / 10</span
+            ><span class="timer-chip"><b id="playerTimer">20</b>″</span>
+          </div>
+          <div class="progress-track">
+            <div id="playerProgress" class="progress-fill"></div>
+          </div>
+          <img
+            id="playerQuestionImage"
+            class="player-question-image"
+            alt="Ιστορική εικόνα σχετική με την ερώτηση"
+          /><small id="playerImageCredit" class="image-credit"></small>
+          <h2 id="playerQuestionText" class="player-question-text"></h2>
+          <div id="playerChoices" class="player-choices"></div>
+          <p id="playerAnswerFeedback" class="muted feedback"></p>
+        </div>
+        <div id="playerResultPanel" class="player-card panel hidden">
+          <div class="result-icon" id="playerResultIcon">✓</div>
+          <div class="eyebrow">ROUND COMPLETE</div>
+          <h2 id="playerResultTitle">Σωστά!</h2>
+          <p id="playerResultDetail" class="muted"></p>
+          <div class="player-points">
+            <strong id="playerPoints">+0</strong><span>ΠΟΝΤΟΙ</span>
+          </div>
+          <p class="muted">Δες την κατάταξη στην οθόνη του παρουσιαστή.</p>
+        </div>
+        <div id="playerFinalPanel" class="player-card panel hidden">
+          <div class="trophy">🏆</div>
+          <div class="eyebrow">GAME OVER</div>
+          <h2>Τέλος παιχνιδιού!</h2>
+          <p id="playerFinalMessage" class="muted"></p>
+          <div class="player-points">
+            <strong id="playerFinalPoints">0</strong
+            ><span>ΣΥΝΟΛΙΚΟΙ ΠΟΝΤΟΙ</span>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <span>HISTORY ARENA</span
+      ><span>Εκπαιδευτικό παιχνίδι · Το Μεγάλο Σχίσμα</span><span>✦</span>
+    </footer>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
