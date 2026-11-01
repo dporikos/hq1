@@ -1017,7 +1017,18 @@ function startPlayer() {
 // START APPLICATION
 // ============================================
 
+
 async function init() {
+  // Initialize the interface immediately
+  if (mode === "player") {
+    startPlayer();
+    $("joinBtn").disabled = true;
+  } else {
+    startHost();
+    $("createRoomBtn").disabled = true;
+    $("createRoomBtn").textContent = "Σύνδεση με Firebase...";
+  }
+
   try {
     const credential = await signInAnonymously(auth);
     uid = credential.user.uid;
@@ -1026,12 +1037,24 @@ async function init() {
     console.log("Database:", firebaseConfig.databaseURL);
 
     if (mode === "player") {
-      startPlayer();
+      $("joinBtn").disabled = false;
     } else {
-      startHost();
+      $("createRoomBtn").disabled = false;
+      $("createRoomBtn").textContent = "Δημιουργία παιχνιδιού ↗";
     }
+
   } catch (error) {
-    reportError(error);
+    console.error("Firebase initialization failed:", error);
+
+    const message = error.code || error.message || String(error);
+
+    if (mode === "player") {
+      $("joinError").textContent = "Firebase: " + message;
+    } else {
+      $("createRoomBtn").textContent = "Firebase Error";
+    }
+
+    alert("Αποτυχία σύνδεσης Firebase: " + message);
   }
 }
 
