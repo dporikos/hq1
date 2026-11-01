@@ -521,8 +521,24 @@ function renderHostQuestion() {
     `<div><b>${"ABCD"[i]}</b>${escapeHtml(answer)}</div>`
   ).join("");
 
-  $("hostQuestionImage").src = q.img;
+  
+const hostImage = $("hostQuestionImage");
+
+if (hostImage.getAttribute("src") !== q.img) {
+  hostImage.src = q.img;
   $("hostImageCredit").textContent = q.credit;
+}
+
+hostImage.onerror = function () {
+  console.warn("Image failed to load:", this.src);
+  this.style.visibility = "hidden";
+};
+
+hostImage.onload = function () {
+  this.style.visibility = "visible";
+};
+
+
 
   $("hostTimer").textContent = room.timeLeft;
   $("hostProgress").style.width = room.timeLeft * 5 + "%";
